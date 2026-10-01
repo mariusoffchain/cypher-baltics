@@ -12,3 +12,6 @@ header,.section,footer{border:0}.hero{padding-bottom:64px}.hero h1{font-size:cla
 
 /* Keep the mobile map close to the introduction without an extra CTA row. */
 .hero-detail{margin-bottom:0}@media(max-width:700px){.hero{row-gap:8px}}
+
+/* Match the cropped navigation mark to the two-line wordmark. */
+header .brand-map{height:2.1em;width:auto;flex-shrink:0}

@@ -9,7 +9,7 @@ html=(source/'matrix.template.html').read_text()
 (out/'index.html').write_text(html)
 for name in ['matrix.css','matrix.js']:
     shutil.copy2(source/name,out/name)
-assets=['PlexSans.woff2','PlexMono.woff2','righteous-latin.woff2','jetbrainsmono-latin.woff2','cypher-map-borders.svg','lithuania-btc.png','bitcoin-baltics.svg','favicon.svg','favicon.png','apple-touch-icon.png','share.png','IBM-Plex-OFL.txt','Righteous-OFL.txt','JetBrainsMono-OFL.txt']
+assets=['PlexSans.woff2','PlexMono.woff2','righteous-latin.woff2','jetbrainsmono-latin.woff2','cypher-map-borders.svg','cypher-map-navbar.svg','lithuania-btc.png','bitcoin-baltics.svg','favicon.svg','favicon.png','apple-touch-icon.png','share.png','IBM-Plex-OFL.txt','Righteous-OFL.txt','JetBrainsMono-OFL.txt']
 for name in assets:
     if (source/'assets'/name).exists(): shutil.copy2(source/'assets'/name,out/'assets'/name)
 (out/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: https://cypherbaltics.org/sitemap.xml\n')

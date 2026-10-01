@@ -9,7 +9,7 @@ html=(source/'matrix.template.html').read_text()
 (out/'index.html').write_text(html)
 for name in ['matrix.css','matrix.js']:
     shutil.copy2(source/name,out/name)
-assets=['PlexSans.woff2','PlexMono.woff2','righteous-latin.woff2','jetbrainsmono-latin.woff2','cypher-map-borders.svg','cypher-map-navbar.svg','lithuania-btc.png','bitcoin-baltics.svg','favicon.svg','favicon.png','apple-touch-icon.png','share.png','IBM-Plex-OFL.txt','Righteous-OFL.txt','JetBrainsMono-OFL.txt']
+assets=['PlexSans.woff2','PlexMono.woff2','righteous-latin.woff2','jetbrainsmono-latin.woff2','cypher-map-borders.svg','cypher-map-navbar.svg','lithuania-btc.png','bitcoin-baltics.svg','crypto-baltics-map.svg','favicon.svg','favicon.png','apple-touch-icon.png','share.png','IBM-Plex-OFL.txt','Righteous-OFL.txt','JetBrainsMono-OFL.txt']
 for name in assets:
     if (source/'assets'/name).exists(): shutil.copy2(source/'assets'/name,out/'assets'/name)
 (out/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: https://cypherbaltics.org/sitemap.xml\n')
@@ -23,7 +23,7 @@ Cypher Baltics is maintained by Marius Off-Chain. It does not claim registered n
 ## Pages and resources
 - [Approach](https://cypherbaltics.org/#approach): Privacy, encryption, free software, open technology and monetary sovereignty.
 - [PROOF](https://cypherbaltics.org/#proof): The privacy and sovereignty conference in Vilnius that informs the initiative.
-- [Communities](https://cypherbaltics.org/#initiatives): Lithuania BTC, an autonomous local community, and Bitcoin Baltics, a regional initiative.
+- [Communities](https://cypherbaltics.org/#initiatives): Lithuania BTC, an autonomous local community, Bitcoin Baltics, a regional initiative, and Crypto Baltics, a sourced Bitcoin and cryptocurrency directory.
 - [Full text](https://cypherbaltics.org/llms-full.txt): Readable text of the current site.
 - [Contact](mailto:contact@cypherbaltics.org)
 

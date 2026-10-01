@@ -15,8 +15,8 @@ test('Sharing image is a genuine 1200x630 PNG',()=>{
  const png=readFileSync(new URL('assets/share.png',root));
  assert.equal(png.subarray(1,4).toString(),'PNG');assert.equal(png.readUInt32BE(16),1200);assert.equal(png.readUInt32BE(20),630);
 });
-test('Production contains neither prototypes nor Crypto Baltics card',()=>{
- assert.ok(!html.includes('Design studies'));assert.ok(!html.includes('href="https://cryptobaltics.org/"'));
+test('Production excludes prototypes and includes the approved initiatives',()=>{
+ assert.ok(!html.includes('Design studies'));assert.ok(html.includes('href="https://cryptobaltics.org/"'));
  assert.ok(!readdirSync(root).includes('identity'));assert.equal((html.match(/<h1>/g)||[]).length,1);
  assert.ok(html.indexOf('id="proof"')<html.indexOf('id="initiatives"'));
 });

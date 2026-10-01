@@ -1,0 +1,17 @@
+node_modules/
+.wrangler/
+public/
+.env*
+.dev.vars*
+.DS_Store
+# Local visual studies and review screenshots, preserved outside version control.
+identity/*.jpg
+identity/matrix.html
+identity/a.html
+identity/b.html
+identity/c.html
+identity/matrix-v1.html
+identity/map-logos.html
+identity/style.css
+build-mockups.py
+build-logo-studies.py

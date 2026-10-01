@@ -7,7 +7,7 @@ out=root/'public'
 html=(source/'matrix.template.html').read_text()
 (source/'matrix.html').write_text(html)
 (out/'index.html').write_text(html)
-for name in ['matrix.css','matrix.js']:
+for name in ['matrix.css','matrix.js','external-links.js']:
     shutil.copy2(source/name,out/name)
 assets=['PlexSans.woff2','PlexMono.woff2','righteous-latin.woff2','jetbrainsmono-latin.woff2','cypher-map-borders.svg','cypher-map-navbar.svg','lithuania-btc.png','bitcoin-baltics.svg','crypto-baltics-map.svg','favicon.svg','favicon.png','apple-touch-icon.png','share.png','IBM-Plex-OFL.txt','Righteous-OFL.txt','JetBrainsMono-OFL.txt']
 for name in assets:

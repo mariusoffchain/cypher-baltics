@@ -1,5 +1,35 @@
 [
   {
+    "country": "LT",
+    "initiative": "bsides-vilnius",
+    "organiser": "BSides Vilnius",
+    "type": "conference",
+    "topics": [
+      "Cybersecurity",
+      "Open technology"
+    ],
+    "url": "https://bsidesvilnius.lt/",
+    "website": "https://bsidesvilnius.lt/",
+    "sources": [
+      "https://bsidesvilnius.lt/",
+      "https://bsidesvilnius.lt/schedule/"
+    ],
+    "sourceVerifiedAt": "2026-10-02",
+    "id": "bsides-vilnius-2027",
+    "status": "planned",
+    "title": {
+      "en": "BSides Vilnius 2027"
+    },
+    "description": {
+      "en": "The Vilnius cybersecurity community is preparing its 2027 edition. Dates and venue have not yet been announced."
+    },
+    "venue": "Vilnius · venue to be announced",
+    "lat": 54.6872,
+    "lon": 25.2797,
+    "locationPrecision": "city",
+    "mapNote": "Vilnius city marker. The 2027 venue has not been announced."
+  },
+  {
     "id": "planned-meetup",
     "type": "meetup",
     "status": "planned",
@@ -10,26 +40,6 @@
     "description": {
       "en": "We are preparing the next meetup. The date and location will be announced here and in our community channels.",
       "lt": "Planuojame kitą susitikimą. Datą ir vietą paskelbsime čia ir bendruomenės kanaluose."
-    },
-    "country": "LT",
-    "topics": [
-      "Bitcoin"
-    ],
-    "organiser": "Lithuania BTC",
-    "url": "https://lithuaniabtc.com/en/",
-    "locationPrecision": "unannounced"
-  },
-  {
-    "id": "planned-walk",
-    "type": "walk",
-    "status": "planned",
-    "title": {
-      "en": "Next Bitcoin Walk",
-      "lt": "Kitas „Bitcoin Walk“ pasivaikščiojimas"
-    },
-    "description": {
-      "en": "We are preparing the next walk. The date and location will be announced here and in our community channels.",
-      "lt": "Planuojame kitą pasivaikščiojimą. Datą ir susitikimo vietą paskelbsime čia ir bendruomenės kanaluose."
     },
     "country": "LT",
     "topics": [
@@ -364,36 +374,6 @@
     "lon": 24.1052,
     "locationPrecision": "city",
     "mapNote": "City-level location. See the organiser for the venue."
-  },
-  {
-    "country": "LT",
-    "initiative": "bsides-vilnius",
-    "organiser": "BSides Vilnius",
-    "type": "conference",
-    "topics": [
-      "Cybersecurity",
-      "Open technology"
-    ],
-    "url": "https://bsidesvilnius.lt/",
-    "website": "https://bsidesvilnius.lt/",
-    "sources": [
-      "https://bsidesvilnius.lt/",
-      "https://bsidesvilnius.lt/schedule/"
-    ],
-    "sourceVerifiedAt": "2026-10-02",
-    "id": "bsides-vilnius-2027",
-    "status": "planned",
-    "title": {
-      "en": "BSides Vilnius 2027"
-    },
-    "description": {
-      "en": "The Vilnius cybersecurity community is preparing its 2027 edition. Dates and venue have not yet been announced."
-    },
-    "venue": "Vilnius · venue to be announced",
-    "lat": 54.6872,
-    "lon": 25.2797,
-    "locationPrecision": "city",
-    "mapNote": "Vilnius city marker. The 2027 venue has not been announced."
   },
   {
     "country": "LT",

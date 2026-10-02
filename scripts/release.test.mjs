@@ -8,7 +8,7 @@ test('All local HTML links and assets resolve; anchors exist',()=>{
  for(const [,url] of html.matchAll(/(?:src|href)="([^"]+)"/g)){
   if(/^(https?:|mailto:)/.test(url))continue;
   if(url.startsWith('#')){if(url!=='#')assert.ok(html.includes(`id="${url.slice(1)}"`),url);continue;}
-  assert.ok(existsSync(new URL(url,root)),url);
+  assert.ok(existsSync(new URL(url.replace(/^\//,''),root)),url);
  }
 });
 test('Sharing image is a genuine 1200x630 PNG',()=>{
@@ -41,3 +41,26 @@ test('Canonical requests preserve asset status and add security headers',async()
  assert.equal(response.status, 301);
  assert.equal(response.headers.get('Location'), 'https://cypherbaltics.org/?check=1');
  });
+
+const eventData=JSON.parse(readFileSync(new URL('events/events.json',root),'utf8'));
+test('Events selection excludes Solana and merchants, includes BSides without invented dates',()=>{
+ assert.ok(eventData.length>8);
+ assert.ok(!eventData.some(e=>JSON.stringify(e).toLowerCase().includes('solana')));
+ const next=eventData.find(e=>e.id==='bsides-vilnius-2027');assert.ok(next);assert.equal(next.start,undefined);assert.equal(next.locationPrecision,'city');
+ for(const e of eventData){assert.ok(e.title.en);assert.ok(e.url);assert.ok(e.topics.length);if(e.image)assert.ok(existsSync(new URL('events/'+e.image.src,root)));}
+});
+test('Calendar uses Baltic dates and includes the last day of a multi-day event',async()=>{
+ const {eventOnDay,isPast,dayKey}=await import('../events/events.js');
+ assert.equal(dayKey('2026-06-03T22:30:00Z'),'2026-06-04');
+ const e={start:'2026-06-03T00:00:00+03:00',end:'2026-06-04T23:59:59+03:00'};
+ assert.ok(eventOnDay(e,'2026-06-04'));assert.ok(!eventOnDay(e,'2026-06-05'));
+ assert.ok(isPast(e,new Date('2026-10-02').getTime()));assert.ok(!isPast({status:'planned'}));
+});
+test('Map CSP permits only the needed tile service and keeps homepage policy strict',async()=>{
+ const env={ASSETS:{fetch:async()=>new Response('ok')}};
+ const map=await worker.fetch(new Request('https://cypherbaltics.org/events/'),env);
+ const home=await worker.fetch(new Request('https://cypherbaltics.org/'),env);
+ assert.ok(map.headers.get('content-security-policy').includes('https://tiles.openfreemap.org'));
+ assert.ok(!home.headers.get('content-security-policy').includes('unsafe-inline'));
+ assert.ok(!readFileSync(new URL('events/events.js',root),'utf8').includes('btcmap.org'));
+});

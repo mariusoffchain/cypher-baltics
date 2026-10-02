@@ -49,3 +49,11 @@ IBM Plex, Righteous and JetBrains Mono are bundled locally with their OFL notice
 ## Checks
 
 Automated tests cover local references, sharing PNG dimensions, canonical metadata, exclusion of prototypes and redirect behavior. Layout checked at 320–1440 px. No Lighthouse score or physical-device testing is claimed. Google Search Console is managed separately by the site owner.
+
+## Events map
+
+`/events/` is a separate events-only map and calendar in the Cypher identity, using the same MapLibre/OpenFreeMap foundation as the community maps. No BTC Map API, merchant snapshot or merchant controls are included.
+
+Edit `events/events.json` to curate the list. Initial selection comes from the community sites plus BSides Vilnius, explicitly requested by Marius. Solana is excluded from this page. Keep source URLs and verification dates. A listing does not imply formal partnership. Mark unknown dates as `status: planned` with no `start`; use `locationPrecision: city` and `mapNote` for approximate city markers. Never reuse a previous edition's venue for an unannounced edition. Topics support Bitcoin, Privacy, Cybersecurity and Open technology. The calendar uses Europe/Vilnius time and supports multi-day events.
+
+Assets, original image attribution and MapLibre's BSD license are retained in `events/`. The builder copies this self-contained directory to `public/events/`, adds the URL to sitemap/llms and links it from the homepage. No sibling repository is required to rebuild. Data is manually curated; updates in the other sites are not automatically imported. Run `npm test`, `npm run dev`, then `npm run deploy` with the existing Cloudflare profile. The Worker permits OpenFreeMap tile requests and MapLibre blob workers only on `/events/`; the homepage policy stays unchanged. Tiles are third-party requests, documented on the map and in the site's privacy note.

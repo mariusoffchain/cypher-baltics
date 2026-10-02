@@ -13,7 +13,7 @@ assets=['PlexSans.woff2','PlexMono.woff2','righteous-latin.woff2','jetbrainsmono
 for name in assets:
     if (source/'assets'/name).exists(): shutil.copy2(source/'assets'/name,out/'assets'/name)
 (out/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: https://cypherbaltics.org/sitemap.xml\n')
-(out/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://cypherbaltics.org/</loc></url></urlset>\n')
+(out/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://cypherbaltics.org/</loc></url><url><loc>https://cypherbaltics.org/events/</loc></url></urlset>\n')
 (out/'llms.txt').write_text('''# Cypher Baltics
 
 > A Baltic initiative around privacy, individual sovereignty and free technology.
@@ -21,6 +21,7 @@ for name in assets:
 Cypher Baltics is maintained by Marius Off-Chain. It does not claim registered nonprofit status.
 
 ## Pages and resources
+- [Events](https://cypherbaltics.org/events/): Map and calendar of Bitcoin, privacy and technology gatherings. No merchant listings.
 - [Approach](https://cypherbaltics.org/#approach): Privacy, encryption, free software, open technology and monetary sovereignty.
 - [PROOF](https://cypherbaltics.org/#proof): The privacy and sovereignty conference in Vilnius that informs the initiative.
 - [Communities](https://cypherbaltics.org/#initiatives): Lithuania BTC, an autonomous local community, Bitcoin Baltics, a regional initiative, and Crypto Baltics, a sourced Bitcoin and cryptocurrency directory.
@@ -48,4 +49,5 @@ class Text(HTMLParser):
 p=Text();p.feed(html)
 (out/'llms-full.txt').write_text('# Cypher Baltics\nSource: https://cypherbaltics.org/\n\n'+re.sub(r'\n\s*\n+', '\n\n',''.join(p.parts)).strip()+'\n')
 (out/'404.html').write_text('''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Page not found — Cypher Baltics</title><link rel="stylesheet" href="/matrix.css"><main class="wrap section"><p class="eyebrow">404 / Cypher Baltics</p><h1>Page not found.</h1><p>This address does not match a page on this site.</p><a class="primary" href="/">Return to Cypher Baltics ↗</a></main></html>''')
+shutil.copytree(root/'events', out/'events', dirs_exist_ok=True)
 print(f'Built {out}')

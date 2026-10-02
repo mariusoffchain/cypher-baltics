@@ -7,3 +7,18 @@
 
 /* Shared community-list composition: date on the left, event details on the right. */
 .event-row{display:grid;grid-template-columns:48px minmax(0,1fr);gap:18px;align-items:center;padding:19px 0}.event-row .date-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;color:#79efa0;font-family:PlexMono,monospace}.event-row .date-badge strong{font-size:26px;line-height:1;margin:0 0 6px;font-weight:400}.date-badge>span{font-size:12px;text-transform:uppercase}.event-copy{min-width:0}.event-row .event-copy>strong{font-size:18px;margin:0 0 8px;line-height:1.35}.event-row .meta{font:12px/1.6 PlexSans,Arial,sans-serif;color:#a6b7aa}.event-row .venue{display:block;margin-top:3px;font-size:12px}.list-heading{font:400 12px/1.5 PlexMono,monospace;letter-spacing:.05em;text-transform:uppercase;color:#79efa0;margin:28px 0 0;padding-bottom:13px;border-bottom:1px solid #23372a}.sidebar-intro{margin-bottom:22px}.event-row:hover{text-decoration:none}
+
+/* Map controls follow the same dark green palette as the site. */
+.events-page .maplibregl-ctrl-group{background:#101d14;border:1px solid #365541;border-radius:0;box-shadow:none}
+.events-page .maplibregl-ctrl-group button{width:40px;height:40px;background:transparent;color:#79efa0}
+.events-page .maplibregl-ctrl-group button+button{border-top:1px solid #365541}
+.events-page .maplibregl-ctrl-group button:hover{background:#203b29}
+.events-page .maplibregl-ctrl-group button .maplibregl-ctrl-icon{background-image:none;display:grid;place-items:center;font:24px/1 PlexMono,monospace}
+.events-page .maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon::before{content:'+'}
+.events-page .maplibregl-ctrl-zoom-out .maplibregl-ctrl-icon::before{content:'−'}
+.events-page .maplibregl-ctrl-attrib{background:#101d14ed;color:#a6b7aa;border-radius:0;border:1px solid #365541}
+.events-page .maplibregl-ctrl-attrib a{color:#a6b7aa}
+.events-page .maplibregl-ctrl-attrib-button{background-color:#101d14}
+.events-page .maplibregl-ctrl-attrib-button::before{filter:invert(1)}
+.events-page .map-reset{color:#79efa0;background:#101d14;border-color:#365541}
+.events-page .map-reset:hover{background:#203b29}

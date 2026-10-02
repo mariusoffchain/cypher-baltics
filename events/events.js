@@ -27,7 +27,7 @@ function render(){
 }
 function renderMarkers(list){
  if(!map)return;markers.forEach(m=>m.remove());markers=[];
- const groups=new Map();for(const e of list){if(!Number.isFinite(e.lat)||!Number.isFinite(e.lon))continue;const key=`${e.lon},${e.lat}`;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(e);}
+ const groups=new Map();for(const e of list){if(isPast(e))continue;if(!Number.isFinite(e.lat)||!Number.isFinite(e.lon))continue;const key=`${e.lon},${e.lat}`;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(e);}
  for(const group of groups.values()){
   const e=group[0], el=document.createElement('button');el.className='event-marker';el.textContent=group.length>1?group.length:'•';el.setAttribute('aria-label',group.map(x=>x.title.en).join(', '));
   el.onclick=()=>{if(group.length===1)openEvent(e.id);else{const box=document.createElement('div');for(const item of group){const b=document.createElement('button');b.textContent=item.title.en;b.className='popup-event';b.onclick=()=>{popup.remove();openEvent(item.id);};box.append(b);}const popup=new maplibregl.Popup().setLngLat([e.lon,e.lat]).setDOMContent(box).addTo(map);}};
@@ -38,7 +38,7 @@ function openEvent(id){
  const e=events.find(e=>e.id===id);if(!e)return;
  $('#event-detail').innerHTML=`<p class="eyebrow">${e.start?(isPast(e)?'Past event':'Upcoming event'):'In preparation'} · ${esc(e.type)}</p><h2 id="detail-title">${esc(e.title.en)}</h2><div class="detail-grid"><div class="event-detail-copy"><p>${esc(dateText(e))}</p><p>${esc(e.address||e.venue||'Location to be announced')}${e.mapNote?'<br><small>'+esc(e.mapNote)+'</small>':''}</p><p>${esc(e.description.en)}</p><p class="detail-source">${esc(e.organiser)}${e.sourceVerifiedAt?' · Source checked '+esc(e.sourceVerifiedAt):''}</p></div>${e.image?`<div><img src="${esc(e.image.src)}" alt="${esc(e.title.en)}" loading="lazy"><p class="detail-source">Visual from <a href="${safeLink(e.image.source||e.url)}" target="_blank" rel="noopener">the organiser</a></p></div>`:''}</div><div class="detail-links"><a href="${safeLink(e.website||e.url)}" target="_blank" rel="noopener">Event / organiser website ↗</a>${e.sources?.[0]?`<a href="${safeLink(e.sources[0])}" target="_blank" rel="noopener">Source ↗</a>`:''}</div>`;
  if(!$('#event-dialog').open)$('#event-dialog').showModal();
- if(map&&Number.isFinite(e.lat))map.flyTo({center:[e.lon,e.lat],zoom:e.locationPrecision==='city'?10:13,essential:false});
+ if(map&&!isPast(e)&&Number.isFinite(e.lat))map.flyTo({center:[e.lon,e.lat],zoom:e.locationPrecision==='city'?10:13,essential:false});
  history.replaceState(null,'',`#${encodeURIComponent(id)}`);
 }
 function setupMap(){

@@ -15,3 +15,7 @@ header,.section,footer{border:0}.hero{padding-bottom:64px}.hero h1{font-size:cla
 
 /* Match the cropped navigation mark to the two-line wordmark. */
 header .brand-map{height:2.1em;width:auto;flex-shrink:0}
+
+/* Shared navigation on the homepage and events map. */
+.site-header{height:88px;min-height:88px;gap:24px;padding-block:14px}.site-header nav{display:flex;gap:24px;align-items:center;flex-wrap:nowrap;order:initial;width:auto;margin-left:auto}.site-header nav a[aria-current=page]{color:var(--green);text-decoration:underline;text-underline-offset:6px}.mobile-actions{display:none}
+@media(max-width:760px){.site-header{height:76px;min-height:76px;gap:10px;padding-block:12px;flex-wrap:nowrap}.site-header nav{display:none}.mobile-actions{display:flex;align-items:center;gap:2px;margin-left:auto}.mobile-actions a{display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;margin:0;color:inherit}.mobile-actions a:hover,.mobile-actions a[aria-current=page]{color:var(--green)}.site-header .brand{font-size:19px;gap:10px}}

@@ -24,3 +24,5 @@
 .events-page .map-reset:hover{background:#203b29}
 
 .events-page .maplibregl-ctrl-top-right{display:flex;align-items:flex-start;gap:8px;padding:10px}.events-page .maplibregl-ctrl-top-right .maplibregl-ctrl{margin:0}.events-page .map-reset-control button{display:grid;place-items:center}
+
+.events-header.site-header{padding-inline:6vw}.events-header.site-header nav{gap:24px}@media(max-width:760px){.events-header.site-header nav{display:none}.events-header.site-header{padding-inline:6vw}}

@@ -22,3 +22,5 @@
 .events-page .maplibregl-ctrl-attrib-button::before{filter:invert(1)}
 .events-page .map-reset{color:#79efa0;background:#101d14;border-color:#365541}
 .events-page .map-reset:hover{background:#203b29}
+
+.events-page .maplibregl-ctrl-top-right{display:flex;align-items:flex-start;gap:8px;padding:10px}.events-page .maplibregl-ctrl-top-right .maplibregl-ctrl{margin:0}.events-page .map-reset-control button{display:grid;place-items:center}

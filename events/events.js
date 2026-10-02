@@ -46,7 +46,16 @@ function setupMap(){
   map=new maplibregl.Map({container:'map',style:'map-style.json',center:[24.8,56.9],zoom:5.2,attributionControl:true});
   map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
   map.on('load',()=>{$('#map-status').hidden=true;renderMarkers(events);});map.on('error',()=>{$('#map-status').hidden=false;});
-  $('#reset-map').onclick=()=>map.fitBounds([[20.7,53.8],[28.3,59.9]],{padding:40});
+  map.addControl({
+   onAdd(currentMap){
+    this.element=document.createElement('div');this.element.className='maplibregl-ctrl maplibregl-ctrl-group map-reset-control';
+    const reset=document.createElement('button');reset.type='button';reset.title='Reset map view';reset.setAttribute('aria-label','Reset map view');
+    reset.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5M19 12a7 7 0 1 0-2 5M20 12a8 8 0 0 0-2-6"/></svg>';
+    reset.onclick=()=>currentMap.fitBounds([[20.7,53.8],[28.3,59.9]],{padding:40,bearing:0,pitch:0});
+    this.element.append(reset);return this.element;
+   },
+   onRemove(){this.element.remove();}
+  },'top-right');
  }catch{$('#map-status').hidden=false;}
 }
 async function init(){

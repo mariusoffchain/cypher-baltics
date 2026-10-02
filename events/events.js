@@ -13,30 +13,17 @@ const dateText = event => {
  if(!event.dateOnly)text+=' · '+new Intl.DateTimeFormat('en-GB',{timeZone:zone,hour:'2-digit',minute:'2-digit'}).format(new Date(event.start))+' (Baltic time)';
  return text;
 };
-let events=[], period='upcoming', selectedDay='', month=new Date(), map, markers=[];
-month=new Date(month.getFullYear(),month.getMonth(),1);
-const filtered = () => events.filter(e=>(!$('#topic').value||e.topics.includes($('#topic').value))&&(!$('#country').value||e.country===$('#country').value));
-function visible() { return filtered().filter(e=>selectedDay ? eventOnDay(e,selectedDay) : period==='past'?isPast(e):!isPast(e)).sort((a,b)=>period==='past'?new Date(b.start)-new Date(a.start):(new Date(a.start||'9999-01-01')-new Date(b.start||'9999-01-01'))); }
-function renderCalendar() {
- $('#month-name').textContent=month.toLocaleDateString('en-GB',{month:'long',year:'numeric'});
- const first=(month.getDay()+6)%7, days=new Date(month.getFullYear(),month.getMonth()+1,0).getDate();
- $('#calendar-days').replaceChildren();
- for(let i=0;i<first;i++)$('#calendar-days').append(document.createElement('span'));
- for(let d=1;d<=days;d++){
-  const key=`${month.getFullYear()}-${String(month.getMonth()+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-  const matches=filtered().filter(e=>eventOnDay(e,key)), button=document.createElement('button');
-  button.className='day'+(matches.length?' has-events':'');button.textContent=d;button.disabled=!matches.length;
-  button.setAttribute('aria-label',`${key}, ${matches.length} events`);button.setAttribute('aria-pressed',key===selectedDay);
-  button.onclick=()=>{selectedDay=key;render();};$('#calendar-days').append(button);
- }
- $('#clear-date').hidden=!selectedDay;
+let events=[], map, markers=[];
+function eventRow(e) {
+ const date=e.start?`<strong>${esc(new Intl.DateTimeFormat('en-GB',{timeZone:zone,day:'2-digit'}).format(new Date(e.start)))}</strong><span>${esc(new Intl.DateTimeFormat('en-GB',{timeZone:zone,month:'short'}).format(new Date(e.start)))}</span>`:'<svg viewBox="0 0 24 24" width="26" height="30" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 3h14M5 21h14M7 3v4c0 3 5 5 5 5s5-2 5-5V3M7 21v-4c0-3 5-5 5-5s5 2 5 5v4"/></svg>';
+ const location=[e.country,e.venue].filter(Boolean).join(' · ');
+ return `<button class="event-row" data-event="${esc(e.id)}"><span class="date-badge" aria-hidden="true">${date}</span><span class="event-copy"><strong>${esc(e.title.en)}</strong><span class="meta">${esc(dateText(e))}</span><span class="venue">${esc(location||'Venue to be announced')}${e.locationPrecision==='city'?' · City location':''}</span></span></button>`;
 }
 function render(){
- renderCalendar();
- document.querySelectorAll('[data-period]').forEach(b=>b.setAttribute('aria-pressed',!selectedDay&&b.dataset.period===period));
- const list=visible();$('#result-count').textContent=`${list.length} ${list.length===1?'event':'events'}${selectedDay?' · '+selectedDay:''}`;
- $('#event-list').innerHTML=list.length?list.map(e=>`<button class="event-row" data-event="${esc(e.id)}"><span class="meta">${esc(dateText(e))} · ${esc(e.country)}<br>${esc(e.type)} · ${esc(e.organiser)}</span><strong>${esc(e.title.en)}</strong><span class="venue">${esc(e.venue||'Venue to be announced')}${e.locationPrecision==='city'?' · City location':''}</span></button>`).join(''):'<p>No announced events for this selection. <a href="mailto:contact@cypherbaltics.org">Suggest one</a> or browse past events.</p>';
- $('#event-list').querySelectorAll('[data-event]').forEach(b=>b.onclick=()=>openEvent(b.dataset.event));renderMarkers(list);
+ const upcoming=events.filter(e=>!isPast(e)).sort((a,b)=>new Date(a.start||'9999-01-01')-new Date(b.start||'9999-01-01'));
+ const past=events.filter(e=>isPast(e)).sort((a,b)=>new Date(b.start)-new Date(a.start));
+ $('#event-list').innerHTML=`<section aria-labelledby="upcoming-heading"><h2 class="list-heading" id="upcoming-heading">Upcoming events</h2>${upcoming.length?upcoming.map(eventRow).join(''):'<p>No upcoming events announced yet.</p>'}</section>${past.length?`<section aria-labelledby="past-heading"><h2 class="list-heading" id="past-heading">Past events</h2>${past.map(eventRow).join('')}</section>`:''}`;
+ $('#event-list').querySelectorAll('[data-event]').forEach(b=>b.onclick=()=>openEvent(b.dataset.event));renderMarkers(events);
 }
 function renderMarkers(list){
  if(!map)return;markers.forEach(m=>m.remove());markers=[];
@@ -58,16 +45,13 @@ function setupMap(){
  try{
   map=new maplibregl.Map({container:'map',style:'map-style.json',center:[24.8,56.9],zoom:5.2,attributionControl:true});
   map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
-  map.on('load',()=>{$('#map-status').hidden=true;renderMarkers(visible());});map.on('error',()=>{$('#map-status').hidden=false;});
+  map.on('load',()=>{$('#map-status').hidden=true;renderMarkers(events);});map.on('error',()=>{$('#map-status').hidden=false;});
   $('#reset-map').onclick=()=>map.fitBounds([[20.7,53.8],[28.3,59.9]],{padding:40});
  }catch{$('#map-status').hidden=false;}
 }
 async function init(){
  $('#close-dialog').onclick=()=>$('#event-dialog').close();$('#event-dialog').addEventListener('close',()=>history.replaceState(null,'',location.pathname));
  $('#event-dialog').addEventListener('click',e=>{if(e.target===$('#event-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
- for(const id of ['topic','country'])$('#'+id).onchange=()=>{selectedDay='';const dated=visible().find(e=>e.start);if(dated){const d=new Date(dated.start);month=new Date(d.getFullYear(),d.getMonth(),1);}if(map)map.fitBounds([[20.7,53.8],[28.3,59.9]],{padding:40});render();};
- for(const [id,step] of [['previous-month',-1],['next-month',1]])$('#'+id).onclick=()=>{month=new Date(month.getFullYear(),month.getMonth()+step,1);renderCalendar();};
- $('#clear-date').onclick=()=>{selectedDay='';render();};document.querySelectorAll('[data-period]').forEach(b=>b.onclick=()=>{period=b.dataset.period;selectedDay='';if(period==='past'){const latest=filtered().filter(e=>isPast(e)).sort((a,b)=>new Date(b.start)-new Date(a.start))[0];if(latest){const d=new Date(latest.start);month=new Date(d.getFullYear(),d.getMonth(),1);}}else month=new Date(new Date().getFullYear(),new Date().getMonth(),1);render();});
  try{const response=await fetch('events.json');if(!response.ok)throw Error('Events unavailable');events=await response.json();render();setupMap();if(location.hash)openEvent(decodeURIComponent(location.hash.slice(1)));}catch{$('#event-list').innerHTML='<p>Events could not load. Please reload or <a href="mailto:contact@cypherbaltics.org">contact us</a>.</p>';}
 }
 if(typeof document!=='undefined')init();

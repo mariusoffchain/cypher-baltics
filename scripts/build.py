@@ -21,7 +21,7 @@ for name in assets:
 Cypher Baltics is maintained by Marius Off-Chain. It does not claim registered nonprofit status.
 
 ## Pages and resources
-- [Events](https://cypherbaltics.org/events/): Map and calendar of Bitcoin, privacy and technology gatherings. No merchant listings.
+- [Events](https://cypherbaltics.org/events/): Map and list of privacy, digital sovereignty and technology gatherings. No merchant listings.
 - [Approach](https://cypherbaltics.org/#approach): Privacy, encryption, free software, open technology and monetary sovereignty.
 - [PROOF](https://cypherbaltics.org/#proof): The privacy and sovereignty conference in Vilnius that informs the initiative.
 - [Communities](https://cypherbaltics.org/#initiatives): Lithuania BTC, an autonomous local community, Bitcoin Baltics, a regional initiative, and Crypto Baltics, a sourced Bitcoin and cryptocurrency directory.

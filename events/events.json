@@ -102,7 +102,8 @@
       "Open technology"
     ],
     "organiser": "PROOF",
-    "locationPrecision": "venue"
+    "locationPrecision": "venue",
+    "canonical": "https://lithuaniabtc.com/en/events/meetup-315774816/"
   },
   {
     "id": "2026-08-06-fed",
@@ -149,7 +150,8 @@
     ],
     "organiser": "Lithuania BTC",
     "locationPrecision": "venue",
-    "type": "meetup"
+    "type": "meetup",
+    "canonical": "https://lithuaniabtc.com/en/events/2026-08-06-fed/"
   },
   {
     "id": "2026-07-02-farmer",
@@ -186,7 +188,8 @@
     ],
     "organiser": "Lithuania BTC",
     "locationPrecision": "venue",
-    "type": "meetup"
+    "type": "meetup",
+    "canonical": "https://lithuaniabtc.com/en/events/2026-07-02-farmer/"
   },
   {
     "id": "meetup-315411067",
@@ -224,7 +227,8 @@
     "lon": 25.2797,
     "locationPrecision": "city",
     "mapNote": "City-level location. See the organiser for the venue.",
-    "type": "meetup"
+    "type": "meetup",
+    "canonical": "https://lithuaniabtc.com/en/events/meetup-315411067/"
   },
   {
     "id": "2026-06-04-ekasi",
@@ -260,7 +264,8 @@
     ],
     "organiser": "Lithuania BTC",
     "locationPrecision": "venue",
-    "type": "meetup"
+    "type": "meetup",
+    "canonical": "https://lithuaniabtc.com/en/events/2026-06-04-ekasi/"
   },
   {
     "id": "tallinn-316565528",
@@ -296,7 +301,8 @@
       "Bitcoin"
     ],
     "organiser": "Mission Liberty Tallinn",
-    "locationPrecision": "venue"
+    "locationPrecision": "venue",
+    "canonical": "https://bitcoinbaltics.com/events/tallinn-316565528/"
   },
   {
     "id": "honeybadger-riga-2025",
@@ -334,7 +340,8 @@
       "Bitcoin"
     ],
     "organiser": "Baltic Honeybadger",
-    "locationPrecision": "venue"
+    "locationPrecision": "venue",
+    "canonical": "https://bitcoinbaltics.com/events/honeybadger-riga-2025/"
   },
   {
     "id": "btcpp-riga-privacy-2025",
@@ -373,7 +380,8 @@
     "lat": 56.9496,
     "lon": 24.1052,
     "locationPrecision": "city",
-    "mapNote": "City-level location. See the organiser for the venue."
+    "mapNote": "City-level location. See the organiser for the venue.",
+    "canonical": "https://bitcoinbaltics.com/events/btcpp-riga-privacy-2025/"
   },
   {
     "country": "LT",

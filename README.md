@@ -20,6 +20,7 @@ Open http://127.0.0.1:8782. The explicit localhost upstream keeps production HTT
 - `identity/assets/` contains the production logos, fonts and sharing images.
 - `scripts/build.py` generates `public/`, including robots.txt, sitemap.xml, llms.txt, llms-full.txt and a 404 page.
 - `scripts/prerender-events.mjs` then writes the event list into `public/events/index.html`, using the same `listHTML` as `events/events.js`, so crawlers and visitors without JavaScript can read it.
+- `scripts/build-event-pages.mjs` writes one page per dated event at `/events/<id>/` and adds the events published here to the sitemap. An event copied from Lithuania BTC or Bitcoin Baltics has a `canonical` field in `events/events.json` pointing to its page there; such pages carry no Event JSON-LD. `scripts/event-data.mjs` is the same file in all four Baltic site repositories.
 - `worker.mjs` serves assets, security headers and canonical redirects.
 - `scripts/release.test.mjs` checks asset links, metadata, sharing image and redirects.
 

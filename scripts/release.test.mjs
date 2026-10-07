@@ -79,3 +79,21 @@ test('Events page lists every event before JavaScript and describes itself for s
  assert.match(page,/twitter:image" content="https:\/\/cypherbaltics.org\/assets\/share.png"/);
 });
 
+test('Every dated event has a page; only events published here carry Event data',()=>{
+ const list=readFileSync(new URL('events/index.html',root),'utf8'),sitemap=readFileSync(new URL('sitemap.xml',root),'utf8');
+ const dated=eventData.filter(e=>e.status!=='planned'&&e.start);let own=0;
+ for(const e of dated){
+  const route=`events/${e.id}/`,page=readFileSync(new URL(route+'index.html',root),'utf8');
+  const canonical=e.canonical||`https://cypherbaltics.org/${route}`,mine=!e.canonical;own+=mine;
+  if(e.canonical)assert.match(e.canonical,new RegExp(`^https://(lithuaniabtc\\.com/en|bitcoinbaltics\\.com)/events/${e.id}/$`));
+  assert.ok(page.includes(`rel="canonical" href="${canonical}"`),e.id);
+  assert.equal((page.match(/<h1>/g)||[]).length,1);
+  const schemas=[...page.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map(m=>JSON.parse(m[1]));
+  assert.equal(schemas.length,mine?1:0,e.id);assert.equal(sitemap.includes(`<loc>${canonical}</loc>`),mine);
+  if(mine){assert.equal(schemas[0]['@type'],'Event');assert.equal(schemas[0].url,canonical);assert.ok(schemas[0].startDate);assert.equal(schemas[0].location.address.addressCountry,e.country);}
+  for(const [,url] of page.matchAll(/(?:href|src)="(\/[^"?#]*)(?:[?#][^"]*)?"/g))assert.ok(existsSync(new URL('.'+url+(url.endsWith('/')?'index.html':''),root)),url);
+  assert.ok(list.includes(`<a class="event-row" data-event="${e.id}" href="/${route}">`),e.id);
+ }
+ assert.ok(own>=1);
+ for(const e of eventData.filter(e=>!e.start))assert.ok(!existsSync(new URL(`events/${e.id}/index.html`,root)));
+});

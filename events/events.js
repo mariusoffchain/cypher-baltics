@@ -17,7 +17,9 @@ let events=[], map, markers=[];
 function eventRow(e) {
  const date=e.start?`<strong>${esc(new Intl.DateTimeFormat('en-GB',{timeZone:zone,day:'2-digit'}).format(new Date(e.start)))}</strong><span>${esc(new Intl.DateTimeFormat('en-GB',{timeZone:zone,month:'short'}).format(new Date(e.start)))}</span>`:'<svg viewBox="0 0 24 24" width="26" height="30" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 3h14M5 21h14M7 3v4c0 3 5 5 5 5s5-2 5-5V3M7 21v-4c0-3 5-5 5-5s5 2 5 5v4"/></svg>';
  const location=[e.country,e.venue].filter(Boolean).join(' · ');
- return `<button class="event-row" data-event="${esc(e.id)}"><span class="date-badge" aria-hidden="true">${date}</span><span class="event-copy"><strong>${esc(e.title.en)}</strong><span class="meta">${esc(dateText(e))}</span><span class="venue">${esc(location||'Venue to be announced')}${e.locationPrecision==='city'?' · City location':''}</span></span></button>`;
+ const copy=`<span class="date-badge" aria-hidden="true">${date}</span><span class="event-copy"><strong>${esc(e.title.en)}</strong><span class="meta">${esc(dateText(e))}</span><span class="venue">${esc(location||'Venue to be announced')}${e.locationPrecision==='city'?' · City location':''}</span></span>`;
+ // Dated events link to their own page (scripts/build-event-pages.mjs); a plain click opens the dialog.
+ return e.start?`<a class="event-row" data-event="${esc(e.id)}" href="/events/${encodeURIComponent(e.id)}/">${copy}</a>`:`<button class="event-row" data-event="${esc(e.id)}">${copy}</button>`;
 }
 // Shared with scripts/prerender-events.mjs, which writes the same list into the built page.
 export function listHTML(list, now = Date.now()) {
@@ -27,7 +29,7 @@ export function listHTML(list, now = Date.now()) {
 }
 function render(){
  $('#event-list').innerHTML=listHTML(events);
- $('#event-list').querySelectorAll('[data-event]').forEach(b=>b.onclick=()=>openEvent(b.dataset.event));renderMarkers(events);
+ $('#event-list').querySelectorAll('[data-event]').forEach(b=>b.onclick=ev=>{if(ev.button||ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey)return;ev.preventDefault();openEvent(b.dataset.event);});renderMarkers(events);
 }
 function renderMarkers(list){
  if(!map)return;markers.forEach(m=>m.remove());markers=[];

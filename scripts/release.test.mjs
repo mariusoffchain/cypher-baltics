@@ -24,6 +24,12 @@ test('Metadata and crawler files target the correct canonical domain',()=>{
  assert.ok(html.includes('rel="canonical" href="https://cypherbaltics.org/"'));
  for(const path of ['robots.txt','sitemap.xml','llms.txt','llms-full.txt'])assert.ok(readFileSync(new URL(path,root),'utf8').includes('https://cypherbaltics.org/'));
 });
+test('Structured data describes the organisation and website',()=>{
+ const graph=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1])['@graph'];
+ assert.deepEqual(graph.map(n=>n['@type']),['Organization','WebSite']);
+ for(const node of graph)assert.equal(node.url,'https://cypherbaltics.org/');
+ assert.ok(existsSync(new URL(graph[0].logo.replace('https://cypherbaltics.org/',''),root)));
+});
 for(const host of ['www.cypherbaltics.org','cypherbaltics.com','www.cypherbaltics.com']){
  test(`${host} redirects preserving path and query`,async()=>{
   const r=await worker.fetch(new Request(`https://${host}/example/?lang=en`),{});

@@ -27,7 +27,15 @@
     "lat": 54.6872,
     "lon": 25.2797,
     "locationPrecision": "city",
-    "mapNote": "Vilnius city marker. The 2027 venue has not been announced."
+    "mapNote": "Vilnius city marker. The 2027 venue has not been announced.",
+    "image": {
+      "src": "images/bsides-vilnius.webp",
+      "source": "https://bsidesvilnius.lt/",
+      "original": "https://bsidesvilnius.lt/images/og.png",
+      "width": 1200,
+      "height": 630,
+      "kind": "organiser"
+    }
   },
   {
     "id": "planned-meetup",
@@ -414,6 +422,14 @@
     "lat": 54.6872,
     "lon": 25.2797,
     "locationPrecision": "city",
-    "mapNote": "City-level marker. Venue information is available from the organiser."
+    "mapNote": "City-level marker. Venue information is available from the organiser.",
+    "image": {
+      "src": "images/bsides-vilnius.webp",
+      "source": "https://bsidesvilnius.lt/",
+      "original": "https://bsidesvilnius.lt/images/og.png",
+      "width": 1200,
+      "height": 630,
+      "kind": "organiser"
+    }
   }
 ]

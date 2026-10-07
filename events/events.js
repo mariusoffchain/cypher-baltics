@@ -19,10 +19,14 @@ function eventRow(e) {
  const location=[e.country,e.venue].filter(Boolean).join(' · ');
  return `<button class="event-row" data-event="${esc(e.id)}"><span class="date-badge" aria-hidden="true">${date}</span><span class="event-copy"><strong>${esc(e.title.en)}</strong><span class="meta">${esc(dateText(e))}</span><span class="venue">${esc(location||'Venue to be announced')}${e.locationPrecision==='city'?' · City location':''}</span></span></button>`;
 }
+// Shared with scripts/prerender-events.mjs, which writes the same list into the built page.
+export function listHTML(list, now = Date.now()) {
+ const upcoming=list.filter(e=>!isPast(e,now)).sort((a,b)=>new Date(a.start||'9999-01-01')-new Date(b.start||'9999-01-01'));
+ const past=list.filter(e=>isPast(e,now)).sort((a,b)=>new Date(b.start)-new Date(a.start));
+ return `<section aria-labelledby="upcoming-heading"><h2 class="list-heading" id="upcoming-heading">Upcoming events</h2>${upcoming.length?upcoming.map(eventRow).join(''):'<p>No upcoming events announced yet.</p>'}</section>${past.length?`<section aria-labelledby="past-heading"><h2 class="list-heading" id="past-heading">Past events</h2>${past.map(eventRow).join('')}</section>`:''}`;
+}
 function render(){
- const upcoming=events.filter(e=>!isPast(e)).sort((a,b)=>new Date(a.start||'9999-01-01')-new Date(b.start||'9999-01-01'));
- const past=events.filter(e=>isPast(e)).sort((a,b)=>new Date(b.start)-new Date(a.start));
- $('#event-list').innerHTML=`<section aria-labelledby="upcoming-heading"><h2 class="list-heading" id="upcoming-heading">Upcoming events</h2>${upcoming.length?upcoming.map(eventRow).join(''):'<p>No upcoming events announced yet.</p>'}</section>${past.length?`<section aria-labelledby="past-heading"><h2 class="list-heading" id="past-heading">Past events</h2>${past.map(eventRow).join('')}</section>`:''}`;
+ $('#event-list').innerHTML=listHTML(events);
  $('#event-list').querySelectorAll('[data-event]').forEach(b=>b.onclick=()=>openEvent(b.dataset.event));renderMarkers(events);
 }
 function renderMarkers(list){

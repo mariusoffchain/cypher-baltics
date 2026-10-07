@@ -70,3 +70,12 @@ test('Map CSP permits only the needed tile service and keeps homepage policy str
  assert.ok(!home.headers.get('content-security-policy').includes('unsafe-inline'));
  assert.ok(!readFileSync(new URL('events/events.js',root),'utf8').includes('btcmap.org'));
 });
+test('Events page lists every event before JavaScript and describes itself for search and sharing',()=>{
+ const page=readFileSync(new URL('events/index.html',root),'utf8');
+ assert.equal((page.match(/class="event-row"/g)||[]).length,eventData.length);
+ assert.ok(!page.includes('Loading events'));
+ const data=JSON.parse(page.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
+ assert.equal(data['@type'],'CollectionPage');assert.equal(data.url,'https://cypherbaltics.org/events/');
+ assert.match(page,/twitter:image" content="https:\/\/cypherbaltics.org\/assets\/share.png"/);
+});
+

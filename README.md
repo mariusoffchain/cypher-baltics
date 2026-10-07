@@ -19,6 +19,7 @@ Open http://127.0.0.1:8782. The explicit localhost upstream keeps production HTT
 - `identity/matrix.css` and `identity/matrix.js` contain layout and decorative Matrix animation.
 - `identity/assets/` contains the production logos, fonts and sharing images.
 - `scripts/build.py` generates `public/`, including robots.txt, sitemap.xml, llms.txt, llms-full.txt and a 404 page.
+- `scripts/prerender-events.mjs` then writes the event list into `public/events/index.html`, using the same `listHTML` as `events/events.js`, so crawlers and visitors without JavaScript can read it.
 - `worker.mjs` serves assets, security headers and canonical redirects.
 - `scripts/release.test.mjs` checks asset links, metadata, sharing image and redirects.
 

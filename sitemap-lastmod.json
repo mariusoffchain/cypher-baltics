@@ -1,0 +1,14 @@
+{
+  "https://cypherbaltics.org/": {
+    "sha256": "bd2dc95325de7de2d2b5cdb247d0ed3889e633425f7b561c4575f134a9731b4d",
+    "lastmod": "2026-10-08"
+  },
+  "https://cypherbaltics.org/events/": {
+    "sha256": "099b75fc2b75aa2f117355daab92565a6b3c293f0fc479ce4eb6e563a82d9c73",
+    "lastmod": "2026-10-08"
+  },
+  "https://cypherbaltics.org/events/bsides-vilnius-2026/": {
+    "sha256": "dba0f18c5b6d28cee3563135bd797ed4db69673b00963e799a22103323c714b1",
+    "lastmod": "2026-10-08"
+  }
+}

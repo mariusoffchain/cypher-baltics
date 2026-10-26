@@ -1,5 +1,37 @@
 [
   {
+    "id": "palanga-tech-talk-2026-10-28",
+    "type": "meetup",
+    "start": "2026-10-28T18:30:00+02:00",
+    "title": {
+      "en": "Palanga — Tech & Talk"
+    },
+    "description": {
+      "en": "An informal gathering in Palanga for conversations about technology, AI, engineering, privacy, personal sovereignty, philosophy and investing. Organised by David de Miko at Vandenis."
+    },
+    "venue": "Muzikos klubas \"Vandenis\"",
+    "venueWebsite": "https://www.vandenis.lt/",
+    "address": "Birutės al. 47, Palanga",
+    "country": "LT",
+    "topics": [
+      "Privacy",
+      "Open technology"
+    ],
+    "organiser": "David de Miko",
+    "url": "https://www.facebook.com/events/1833289711186731/",
+    "sources": [
+      "https://www.facebook.com/events/1833289711186731/",
+      "https://www.vandenis.lt/kontaktai",
+      "https://lithuania.travel/other_files/leidiniai/downloads/Dviraciai%20LT%20Minam%20po%20Lietuva.pdf"
+    ],
+    "sourceVerifiedAt": "2026-10-26",
+    "sourceNotes": "Date, start time, organiser and description read on the public Facebook event. Address confirmed by the venue. Venue coordinates from the Lithuanian national tourism cycling guide. No end time or price published in the event details read.",
+    "lat": 55.91412,
+    "lon": 21.05673,
+    "locationPrecision": "venue",
+    "locationSource": "https://www.openstreetmap.org/?mlat=55.91412&mlon=21.05673#map=19/55.91412/21.05673"
+  },
+  {
     "country": "LT",
     "initiative": "bsides-vilnius",
     "organiser": "BSides Vilnius",

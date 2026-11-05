@@ -63,8 +63,8 @@ Assets, original image attribution and MapLibre's BSD license are retained in `e
 
 ## Visitor navigation changes (2026-11-05)
 
-Local work on `fix/visitor-navigation`; no deployment is included. The existing build command also generates `/contribute/`. Its English/Lithuanian form only prepares a message in the browser. It has no submission endpoint, stays disabled without JavaScript, and exposes copying and an explicit email-draft link. No message is sent automatically. Correction links carry the existing event or listing reference.
+Published on 2026-11-06. The build also generates `/contribute/`. Its English/Lithuanian form only prepares a message in the browser. It has no submission endpoint, stays disabled without JavaScript, and exposes copying and an explicit email-draft link. No message is sent automatically. Correction links carry the existing event or listing reference.
 
 Country filtering uses `?country=LT|LV|EE`. The map observes container size changes and fits the available upcoming points. Source-backed Lithuania BTC channels are visible on the home page and in the planned meetup. `events/calendar.js` generates `.ics` files for dated events; no date is inferred from the habitual meetup schedule.
 
-Validation includes the repository tests and separate DOM interaction tests. The latter simulate responsive branches with map geometry mocked; they do not establish the rendered layout, tile loading or behaviour on physical phones. A real desktop/mobile visual review is still required before release. No complete new Lithuanian landing-page translation is claimed.
+Repository tests and cross-site interaction checks passed before publication. Browser review covered desktop and mobile viewports (320, 390 and 1440 px), including the live sites after deployment. Physical phones were not tested. English and Lithuanian pages are available; resource pages use each site’s typography, colours and theme.

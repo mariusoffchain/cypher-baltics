@@ -22,3 +22,6 @@ header .brand-map{height:2.1em;width:auto;flex-shrink:0}
 
 .join-channels{display:flex;gap:12px 22px;flex-wrap:wrap;padding:18px 6vw;font-size:14px;border-bottom:1px solid #23372a}.join-channels a{color:#79efa0}.join-channels strong{font-weight:400;width:100%}
 @media(max-width:700px){.project{grid-template-columns:minmax(0,1fr) max-content}.project-id{min-width:0}.project-id h3{overflow-wrap:anywhere}.project-type{overflow-wrap:anywhere}}
+
+/* Community channels belong to the participation section. */
+.contact .join-channels{padding:18px 0;margin:0 0 20px;border:0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px}.contact .join-channels strong{flex-basis:100%;font-weight:400;color:var(--muted)}.contact .join-channels a{color:var(--green)}

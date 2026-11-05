@@ -32,3 +32,5 @@
 /* Keep MapLibre geometry independent of page flex layout. */
 .map-panel{overflow:hidden;flex-shrink:0}.map-panel #map{position:absolute;width:100%;height:100%}.detail-links{flex-wrap:wrap}.filters a{align-self:end;font-size:13px;color:#79efa0}
 @media(max-width:760px){.events-page dialog{position:fixed;inset:auto 0 0;width:100%;max-width:100%;margin:0;max-height:75dvh;box-sizing:border-box}.events-header .mobile-actions{gap:12px}}
+
+.event-sidebar .filters{grid-template-columns:minmax(0,1fr)}

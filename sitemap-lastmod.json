@@ -1,18 +1,18 @@
 {
   "https://cypherbaltics.org/": {
-    "sha256": "bd2dc95325de7de2d2b5cdb247d0ed3889e633425f7b561c4575f134a9731b4d",
-    "lastmod": "2026-10-08"
+    "sha256": "8d24b4ede6613bb72c74a865b2fc7c0cee5e3e90cda8d94e24688ed69acda032",
+    "lastmod": "2026-11-05"
   },
   "https://cypherbaltics.org/events/": {
-    "sha256": "57427b6c0641497744213fdb22a3686b3b7321a7c6c963e524a2b462bcfb4c48",
-    "lastmod": "2026-10-26"
+    "sha256": "e18b90197975b3668ff8650ab05ed977ae9eae44f559fb0f1c16b4d4e52dcb6a",
+    "lastmod": "2026-11-05"
   },
   "https://cypherbaltics.org/events/palanga-tech-talk-2026-10-28/": {
-    "sha256": "cafbf3b74b5817987783e331a136fcf3838af14fbdba78dba54ce54aa5af270b",
-    "lastmod": "2026-10-26"
+    "sha256": "aad1c97aa0732cdb8c2a82a7174696d94d4ca382e558fab2c57b6b8a5fb5a857",
+    "lastmod": "2026-11-05"
   },
   "https://cypherbaltics.org/events/bsides-vilnius-2026/": {
-    "sha256": "dba0f18c5b6d28cee3563135bd797ed4db69673b00963e799a22103323c714b1",
-    "lastmod": "2026-10-08"
+    "sha256": "0fedd34e5c71e56588481154381c61ac5df03527116f5803760f9f9cce5b7ed7",
+    "lastmod": "2026-11-05"
   }
 }

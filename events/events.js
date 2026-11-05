@@ -14,6 +14,9 @@ const dateText = event => {
  return text;
 };
 let events=[], map, markers=[];
+let countryFilter = new URLSearchParams(globalThis.location?.search || '').get('country') || '';
+if (!['LT','LV','EE'].includes(countryFilter)) countryFilter='';
+const scopedEvents=()=>events.filter(e=>!countryFilter||e.country===countryFilter);
 function eventRow(e) {
  const date=e.start?`<strong>${esc(new Intl.DateTimeFormat('en-GB',{timeZone:zone,day:'2-digit'}).format(new Date(e.start)))}</strong><span>${esc(new Intl.DateTimeFormat('en-GB',{timeZone:zone,month:'short'}).format(new Date(e.start)))}</span>`:'<svg viewBox="0 0 24 24" width="26" height="30" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 3h14M5 21h14M7 3v4c0 3 5 5 5 5s5-2 5-5V3M7 21v-4c0-3 5-5 5-5s5 2 5 5v4"/></svg>';
  const location=[e.country,e.venue].filter(Boolean).join(' · ');
@@ -28,8 +31,8 @@ export function listHTML(list, now = Date.now()) {
  return `<section aria-labelledby="upcoming-heading"><h2 class="list-heading" id="upcoming-heading">Upcoming events</h2>${upcoming.length?upcoming.map(eventRow).join(''):'<p>No upcoming events announced yet.</p>'}</section>${past.length?`<section aria-labelledby="past-heading"><h2 class="list-heading" id="past-heading">Past events</h2>${past.map(eventRow).join('')}</section>`:''}`;
 }
 function render(){
- $('#event-list').innerHTML=listHTML(events);
- $('#event-list').querySelectorAll('[data-event]').forEach(b=>b.onclick=ev=>{if(ev.button||ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey)return;ev.preventDefault();openEvent(b.dataset.event);});renderMarkers(events);
+ $('#event-list').innerHTML=listHTML(scopedEvents());
+ $('#event-list').querySelectorAll('[data-event]').forEach(b=>b.onclick=ev=>{if(ev.button||ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey)return;ev.preventDefault();openEvent(b.dataset.event);});renderMarkers(scopedEvents());
 }
 function renderMarkers(list){
  if(!map)return;markers.forEach(m=>m.remove());markers=[];
@@ -43,15 +46,26 @@ function renderMarkers(list){
 function openEvent(id){
  const e=events.find(e=>e.id===id);if(!e)return;
  $('#event-detail').innerHTML=`<p class="eyebrow">${e.start?(isPast(e)?'Past event':'Upcoming event'):'In preparation'} · ${esc(e.type)}</p><h2 id="detail-title">${esc(e.title.en)}</h2><div class="detail-grid"><div class="event-detail-copy"><p>${esc(dateText(e))}</p><p>${esc(e.address||e.venue||'Location to be announced')}${e.mapNote?'<br><small>'+esc(e.mapNote)+'</small>':''}</p><p>${esc(e.description.en)}</p><p class="detail-source">${esc(e.organiser)}${e.sourceVerifiedAt?' · Source checked '+esc(e.sourceVerifiedAt):''}</p></div>${e.image?`<div><img src="${esc(e.image.src)}" alt="${esc(e.title.en)}" loading="lazy"><p class="detail-source">Visual from <a href="${safeLink(e.image.source||e.url)}" target="_blank" rel="noopener">the organiser</a></p></div>`:''}</div><div class="detail-links"><a href="${safeLink(e.website||e.url)}" target="_blank" rel="noopener">Event / organiser website ↗</a>${e.sources?.[0]?`<a href="${safeLink(e.sources[0])}" target="_blank" rel="noopener">Source ↗</a>`:''}</div>`;
+ const actions=$('#event-detail .detail-links');
+ const correction=document.createElement('a');correction.href='/contribute/?event='+encodeURIComponent(e.id);correction.textContent='Suggest a correction';actions.append(correction);
+ for(const channel of e.communityLinks||[]){const a=document.createElement('a');a.href=channel.url;a.textContent=channel.name;a.target='_blank';a.rel='noopener';actions.append(a);}
+ if(e.start){const a=document.createElement('a');a.href='/events/'+encodeURIComponent(e.id)+'.ics';a.download=e.id+'.ics';a.textContent='Add to calendar';actions.append(a);}
  if(!$('#event-dialog').open)$('#event-dialog').showModal();
  if(map&&!isPast(e)&&Number.isFinite(e.lat))map.flyTo({center:[e.lon,e.lat],zoom:e.locationPrecision==='city'?10:13,essential:false});
  history.replaceState(null,'',`#${encodeURIComponent(id)}`);
+}
+function fitEvents(){
+ if(!map)return;
+ const points=scopedEvents().filter(e=>!isPast(e)&&Number.isFinite(e.lat)&&Number.isFinite(e.lon));
+ if(points.length===1)map.flyTo({center:[points[0].lon,points[0].lat],zoom:8,duration:0});
+ else map.fitBounds([[20.7,53.8],[28.3,59.9]],{padding:35,duration:0});
 }
 function setupMap(){
  try{
   map=new maplibregl.Map({container:'map',style:'map-style.json',center:[24.8,56.9],zoom:5.2,attributionControl:true});
   map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
-  map.on('load',()=>{$('#map-status').hidden=true;renderMarkers(events);});map.on('error',()=>{$('#map-status').hidden=false;});
+  map.on('load',()=>{$('#map-status').hidden=true;map.resize();renderMarkers(scopedEvents());fitEvents();});
+  new ResizeObserver(()=>map.resize()).observe($('#map')); map.on('error',()=>{$('#map-status').hidden=false;});
   map.addControl({
    onAdd(currentMap){
     this.element=document.createElement('div');this.element.className='maplibregl-ctrl maplibregl-ctrl-group map-reset-control';
@@ -65,7 +79,9 @@ function setupMap(){
  }catch{$('#map-status').hidden=false;}
 }
 async function init(){
- $('#close-dialog').onclick=()=>$('#event-dialog').close();$('#event-dialog').addEventListener('close',()=>history.replaceState(null,'',location.pathname));
+ $('#country').value=countryFilter;
+ $('#country').addEventListener('change',()=>{countryFilter=$('#country').value;const url=new URL(location.href);countryFilter?url.searchParams.set('country',countryFilter):url.searchParams.delete('country');history.replaceState(null,'',url);render();fitEvents();});
+ $('#close-dialog').onclick=()=>$('#event-dialog').close();$('#event-dialog').addEventListener('close',()=>history.replaceState(null,'',location.pathname+location.search));
  $('#event-dialog').addEventListener('click',e=>{if(e.target===$('#event-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
  try{const response=await fetch('events.json');if(!response.ok)throw Error('Events unavailable');events=await response.json();render();setupMap();if(location.hash)openEvent(decodeURIComponent(location.hash.slice(1)));}catch{$('#event-list').innerHTML='<p>Events could not load. Please reload or <a href="mailto:contact@cypherbaltics.org">contact us</a>.</p>';}
 }

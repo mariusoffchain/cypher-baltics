@@ -1,3 +1,4 @@
+import {calendarEvent} from "../events/calendar.js";
 // One page per dated event at /events/<id>/, sharing the events page header and styles.
 // Events first published by Lithuania BTC or Bitcoin Baltics carry a `canonical` URL pointing there;
 // only events published here carry Event structured data and appear in the sitemap.
@@ -15,6 +16,7 @@ for(const e of events.filter(hasEventPage)){
  const f=eventFacts(e,{lang:'en',defaultCountry:'LT',imageBase:'/events/'});
  const title=`${f.title}, ${f.shortDate} · Cypher Baltics`;
  const where=[f.venue&&external(f.venueWebsite,f.venue),f.address&&external(f.mapURL,f.address),f.countryName].filter(Boolean).join(' · ');
+ writeFileSync(new URL("events/"+e.id+".ics",out),calendarEvent(e));
  const html=`<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#070b08">
 <title>${esc(title)}</title><meta name="description" content="${esc(f.metaDescription)}">
@@ -23,7 +25,7 @@ for(const e of events.filter(hasEventPage)){
 <body class="event-detail-page"><a class="skip" href="#main">Skip to content</a>${header}
 <main id="main" class="wrap event-detail"><p class="eyebrow"><a href="/events/">Events</a> · ${esc(e.type||'event')}</p><h1>${esc(f.title)}</h1><p class="event-detail-when"><time datetime="${f.startDay}">${esc(f.date)}</time>${f.time?` · ${esc(f.time)} (Baltic time)`:''}</p>
 <div class="detail-grid${f.image?'':' no-image'}"><div class="event-detail-copy"><p>${where||'Location to be announced'}${e.mapNote?`<br><small>${esc(e.mapNote)}</small>`:''}</p>${f.description?`<p>${esc(f.description)}</p>`:''}<p class="detail-source">${esc(e.organiser||'')}${f.checked?`${e.organiser?' · ':''}Source checked ${esc(f.checked)}`:''}</p></div>${f.image?`<figure><img src="${esc(f.image.src)}" alt="${esc(f.title)}"${f.image.width?` width="${f.image.width}" height="${f.image.height}"`:''} decoding="async"><figcaption class="detail-source">Visual from ${external(f.image.source||f.links[0]?.url,'the organiser')}</figcaption></figure>`:''}</div>
-<div class="detail-links">${f.links.map(l=>external(l.url,l.name+' ↗')).join('')}<a href="/events/#${encodeURIComponent(f.id)}">Show on the map</a></div>
+<div class="detail-links"><a href="/events/${encodeURIComponent(e.id)}.ics" download>Add to calendar</a><a href="/contribute/?event=${encodeURIComponent(e.id)}">Suggest a correction</a>${f.links.map(l=>external(l.url,l.name+' ↗')).join('')}<a href="/events/#${encodeURIComponent(f.id)}">Show on the map</a></div>
 <p class="list-note">Dates and venues may change. Check the organiser’s page before travelling.</p></main></body></html>`;
  mkdirSync(new URL('.'+route,out),{recursive:true});
  writeFileSync(new URL('.'+route+'index.html',out),html);

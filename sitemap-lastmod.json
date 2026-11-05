@@ -14,5 +14,21 @@
   "https://cypherbaltics.org/events/bsides-vilnius-2026/": {
     "sha256": "0fedd34e5c71e56588481154381c61ac5df03527116f5803760f9f9cce5b7ed7",
     "lastmod": "2026-11-05"
+  },
+  "https://cypherbaltics.org/lt/": {
+    "sha256": "d964f9c41f4c8cf145c0df6081f3d2c0ef2c96ccd805c9b84fd7aa284b6a3f1d",
+    "lastmod": "2026-11-05"
+  },
+  "https://cypherbaltics.org/lt/events/": {
+    "sha256": "ee1baf3d22c1f9e84bed7e298cb4286ab6ade61ea772748971fd6504dc2be68b",
+    "lastmod": "2026-11-05"
+  },
+  "https://cypherbaltics.org/lt/events/palanga-tech-talk-2026-10-28/": {
+    "sha256": "6d55bb613277d2a435c107ce4633b620f0e4d501a0d4a6dec531d8067aec8f08",
+    "lastmod": "2026-11-05"
+  },
+  "https://cypherbaltics.org/lt/events/bsides-vilnius-2026/": {
+    "sha256": "783c392675bc1cdfe65b713aa5db8224ad29b348052cbd5c07076473228281e5",
+    "lastmod": "2026-11-05"
   }
 }

@@ -4,10 +4,12 @@
     "type": "meetup",
     "start": "2026-10-28T18:30:00+02:00",
     "title": {
-      "en": "Palanga — Tech & Talk"
+      "en": "Palanga — Tech & Talk",
+      "lt": "Palanga — Tech & Talk"
     },
     "description": {
-      "en": "An informal gathering in Palanga for conversations about technology, AI, engineering, privacy, personal sovereignty, philosophy and investing. Organised by David de Miko at Vandenis."
+      "en": "An informal gathering in Palanga for conversations about technology, AI, engineering, privacy, personal sovereignty, philosophy and investing. Organised by David de Miko at Vandenis.",
+      "lt": "Neformalus susitikimas Palangoje, skirtas pokalbiams apie technologijas, dirbtinį intelektą, inžineriją, privatumą, asmeninį suverenitetą, filosofiją ir investavimą. „Vandenyje“ organizavo David de Miko."
     },
     "venue": "Muzikos klubas \"Vandenis\"",
     "venueWebsite": "https://www.vandenis.lt/",
@@ -50,10 +52,12 @@
     "id": "bsides-vilnius-2027",
     "status": "planned",
     "title": {
-      "en": "BSides Vilnius 2027"
+      "en": "BSides Vilnius 2027",
+      "lt": "BSides Vilnius 2027"
     },
     "description": {
-      "en": "The Vilnius cybersecurity community is preparing its 2027 edition. Dates and venue have not yet been announced."
+      "en": "The Vilnius cybersecurity community is preparing its 2027 edition. Dates and venue have not yet been announced.",
+      "lt": "Vilniaus kibernetinio saugumo bendruomenė rengia 2027 m. konferenciją. Datos ir vieta dar nepaskelbtos."
     },
     "venue": "Vilnius · venue to be announced",
     "lat": 54.6872,
@@ -329,10 +333,12 @@
     "start": "2026-09-22T19:00:00+03:00",
     "end": "2026-09-22T21:00:00+03:00",
     "title": {
-      "en": "Bitcoin in Denmark: Building a Community from the Ground Up"
+      "en": "Bitcoin in Denmark: Building a Community from the Ground Up",
+      "lt": "Bitcoin Danijoje. Bendruomenės kūrimas nuo pradžių"
     },
     "description": {
-      "en": "A discussion hosted by Mission Liberty Tallinn with guests from Denmark about Bitcoin meetups, publishing and local community building."
+      "en": "A discussion hosted by Mission Liberty Tallinn with guests from Denmark about Bitcoin meetups, publishing and local community building.",
+      "lt": "„Mission Liberty Tallinn“ surengta diskusija su svečiais iš Danijos apie Bitcoin susitikimus, leidybą ir vietos bendruomenių kūrimą."
     },
     "venue": "Vabaduse Tuba",
     "address": "Pikk 7, Room 11, Tallinn",
@@ -366,10 +372,12 @@
     "start": "2025-08-09T10:00:00+03:00",
     "end": "2025-08-10T18:00:00+03:00",
     "title": {
-      "en": "Baltic Honeybadger 2025"
+      "en": "Baltic Honeybadger 2025",
+      "lt": "Baltic Honeybadger 2025"
     },
     "description": {
-      "en": "A Bitcoin-only conference in Riga, part of Riga Bitcoin Week. Talks and discussions covered Bitcoin, freedom technology and the people building the ecosystem. This is the archived 2025 edition."
+      "en": "A Bitcoin-only conference in Riga, part of Riga Bitcoin Week. Talks and discussions covered Bitcoin, freedom technology and the people building the ecosystem. This is the archived 2025 edition.",
+      "lt": "Tik Bitcoin skirta konferencija Rygoje, „Riga Bitcoin Week“ dalis. Pranešimai ir diskusijos apie Bitcoin, laisvę palaikančias technologijas ir jų kūrėjus. Tai 2025 m. renginio archyvas."
     },
     "venue": "Fantadroms",
     "address": "Riga",
@@ -405,10 +413,12 @@
     "start": "2025-08-07T10:00:00+03:00",
     "end": "2025-08-08T18:00:00+03:00",
     "title": {
-      "en": "bitcoin++ Riga · Privacy edition"
+      "en": "bitcoin++ Riga · Privacy edition",
+      "lt": "bitcoin++ Riga · privatumo renginys"
     },
     "description": {
-      "en": "A technical Bitcoin conference with talks, workshops and a hackathon exploring privacy and peer-to-peer exchange. Held at the National Library of Latvia during Riga Bitcoin Week. This is the archived 2025 edition."
+      "en": "A technical Bitcoin conference with talks, workshops and a hackathon exploring privacy and peer-to-peer exchange. Held at the National Library of Latvia during Riga Bitcoin Week. This is the archived 2025 edition.",
+      "lt": "Techninė Bitcoin konferencija su pranešimais, dirbtuvėmis ir hakatonu apie privatumą bei tiesioginius mainus tarp dalyvių. Vyko Latvijos nacionalinėje bibliotekoje per „Riga Bitcoin Week“. Tai 2025 m. renginio archyvas."
     },
     "venue": "National Library of Latvia",
     "address": "Riga",
@@ -455,10 +465,12 @@
     "sourceVerifiedAt": "2026-10-02",
     "id": "bsides-vilnius-2026",
     "title": {
-      "en": "BSides Vilnius 2026 · Security Theater"
+      "en": "BSides Vilnius 2026 · Security Theater",
+      "lt": "BSides Vilnius 2026 · Security Theater"
     },
     "description": {
-      "en": "Community cybersecurity conference with talks, a capture-the-flag competition and hands-on workshops. Workshops were held on 3 June and the main conference on 4 June 2026 at Kablys."
+      "en": "Community cybersecurity conference with talks, a capture-the-flag competition and hands-on workshops. Workshops were held on 3 June and the main conference on 4 June 2026 at Kablys.",
+      "lt": "Bendruomenės kibernetinio saugumo konferencija su pranešimais, praktinėmis dirbtuvėmis ir „capture-the-flag“ varžybomis. Dirbtuvės vyko 2026 m. birželio 3 d., o pagrindinė konferencija – birželio 4 d. Vilniaus „Kablyje“."
     },
     "start": "2026-06-03T00:00:00+03:00",
     "end": "2026-06-04T23:59:59+03:00",

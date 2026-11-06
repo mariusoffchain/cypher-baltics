@@ -48,7 +48,7 @@
       "https://bsidesvilnius.lt/",
       "https://bsidesvilnius.lt/schedule/"
     ],
-    "sourceVerifiedAt": "2026-10-02",
+    "sourceVerifiedAt": "2026-11-06",
     "id": "bsides-vilnius-2027",
     "status": "planned",
     "title": {
@@ -71,7 +71,8 @@
       "width": 1200,
       "height": 630,
       "kind": "organiser"
-    }
+    },
+    "sourceNotes": "Official homepage still announces preparation for 2027 without a date or venue. The displayed venue imagery and archive describe 2026."
   },
   {
     "id": "planned-meetup",
@@ -105,7 +106,12 @@
         "name": "Satlantis",
         "url": "https://www.satlantis.io/"
       }
-    ]
+    ],
+    "sources": [
+      "https://www.meetup.com/bitcoin-lithuania-meetup/events/"
+    ],
+    "sourceVerifiedAt": "2026-11-06",
+    "sourceNotes": "Public Meetup calendar lists no upcoming event on 2026-11-06. No new date or venue confirmed; private Telegram messages were not reviewed."
   },
   {
     "id": "meetup-315774816",
